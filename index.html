@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!--responsive view port-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<section>
+	<div class="menu">
+	<ul class="sidebar">
+	<li id="alarmid" class="alarmcls"><img  src="icons/clock.svg" class="alarmicon">Alarm</li>
+	<li id="swid" class="swcls"><img src="icons/stopwatch.svg" class="stopwatchicon">Stopwatch</li>
+	<li id="timerid" class="timercls"><img src="icons/hourglass.svg" class="timericon">Timer</li>
+	</ul>
+</div>
+</section>
+
+<main>
+	
+<div class="alarm-section" id="alarm-section" >
+	<div class="alarmheader">
+		<p class="addalarm"><span class="addalarmtxt" id="addalarm">ADD A NEW ALARM</span></p>
+	</div>
+
+	<img src="icons/clock.svg" class="alambg">
+	<h1 class="noalarms">No Alarms</h1>
+</div>
+
+<div class="setalarm-section" id="setalarm-section" style="display: none;">
+
+<div class="table">
+  <div class="cell">
+
+    <h1 id="clock" class="clock"></h1>
+    
+    <select id="hours"></select>
+    <select id="minutes"></select>
+    <select id="seconds"></select>
+    
+    <select id="ampm">
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </select>
+    
+    <p>
+      <button id="snooze" class="hide">Snooze</button>
+      <button id="startstop">Set Alarm</button>
+    </p>
+
+  </div>
+  </div>
+<!-- 	<div class="setalarmform">
+		<form>
+			<span class="cross" id="crossbtn">X</span>
+			<div class="" style="padding-top: 20px;">
+			<label for="name" class="name" id="name">Name : </label>
+			<input type="text" name="nameval" class="nameval" id="nameval">
+			</div>
+			<div style="margin-top: 20px;">
+			<label for="date" class="date" id="date">Date : </label>
+			<button class="week" id="sun">S</button>
+			<button class="week" id="mon">M</button>
+			<button class="week" id="tue">T</button>
+			<button class="week" id="wed">W</button>
+			<button class="week" id="thu">T</button>
+			<button class="week" id="fri">F</button>
+			<button class="week" id="sat">S</button>
+			</div>
+
+			<div class="hrs_min_table">
+			<table class="timeset">
+				<tr>
+					<td>hours</td>
+					<td>&nbsp;</td>
+					<td>minutes</td>
+				</tr>
+				<tr>
+					<td><img src="icons/up-arrow.svg" width="15px"></td>
+					<td>&nbsp;</td>
+					<td><img src="icons/up-arrow.svg" width="15px"></td>
+				</tr>
+				<tr>
+					<td>00</td>
+					<td>:</td>
+					<td>00</td>
+				</tr>
+				<tr>
+				<td><img src="icons/down-arrow.svg" width="15px"></td>
+					<td>&nbsp;</td>
+					<td><img src="icons/down-arrow.svg" width="15px"></td>
+				</tr>
+			</table>	
+			</div>
+			
+			<div style="padding-top: 20px;">
+			<label class="sound" id="sound">Sound</label>
+
+			<button class="tones" id="tone1">1</button>
+			<button class="tones" id="tone2">2</button>
+			<button class="tones" id="tone3">3</button>
+			<button class="tones" id="tone4">4</button>
+			<button class="tones" id="tone5">5</button>
+			<button class="snooz" id="snooz">Set snooz</button>
+			</div>
+
+			<div>
+				<button class="save" id="save">save changes</button>
+			</div>
+		</form>
+	</div> -->
+</div>
+
+<div class="stopwatch-section" id="stopwatch-section" style="display: none;">
+	<div class="stopwatch-container">
+		<div class="swatchtime">00:00:00</div>
+		<div><button onclick="starttime()" class="swbtn">start</button></div>
+		<div><button onclick="stoptime()" class="swbtn">stop</button><br><button onclick="laptime()" class="swbtn">lap</button></div>
+		<div><!-- <button onclick="resumetime()">resume</button> --><button onclick="resettime()" class="swbtn">reset</button></div>
+	</div>
+
+	<ul class="laps">
+	</ul>
+
+</div>
+
+</main>
+
+</body>
+<script type="text/javascript">
+
+document.getElementById("addalarm").addEventListener("click", function() {
+document.getElementById("alarm-section").style.display="none";
+document.getElementById("setalarm-section").style.display="block";
+});	
+
+document.getElementById("crossbtn").addEventListener("click", function() {
+document.getElementById("alarm-section").style.display="block";
+document.getElementById("setalarm-section").style.display="none";
+});	
+
+document.getElementById("swid").addEventListener("click", function() {
+document.getElementById("alarm-section").style.display="none";
+document.getElementById("setalarm-section").style.display="none";
+document.getElementById("stopwatch-section").style.display="block";
+document.getElementById("swid").style.cssText=" background-color:#308a7c;opacity:0.8;border-left:5px solid yellowgreen;";
+
+});	
+
+
+// stopwatch code here
+
+var mil=0;sec=0;min=0;
+var timer;
+
+var watchtime = document.querySelector('.swatchtime');
+var lapvalues=	document.querySelector('.laps');
+
+function starttime(){
+	if (!timer) {
+	timer = setInterval(runtime,10);	
+	}
+	
+} 
+
+function runtime(){
+	getTimer();
+	mil++;
+	if (mil==100) {
+		mil=0;
+		sec++;
+	}
+	if (sec==60) {
+		sec=0;
+		min++;
+	}
+}
+
+function stoptime(){
+sTimer();
+}
+
+function resettime(){
+sTimer();
+mil=0;
+sec=0;
+min=0;
+getTimer();
+}
+
+function getTimer(){
+watchtime.textContent=(min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec)+":"+(mil<10?"0"+mil:mil);		
+}
+
+function sTimer(){
+clearInterval(timer);
+timer=false;
+}
+
+
+// function restarttime(){
+// 	stoptime();
+// 	starttime();
+// }
+
+
+function laptime(){
+	if (timer) {
+		var l= document.createElement("li");
+		l.innerText = getTimer();
+		lapvalues.appendChild(l); 
+	}
+}
+</script>
+<script type="text/javascript">
+	    var time, alarm, currentH, currentM,
+    activeAlarm = false,
+    sound = new Audio("multimedia/ring1.mp3");
+
+// loop alarm
+sound.loop = true;
+
+// define a function to display the current time
+function displayTime() {
+  var now = new Date();
+  time = now.toLocaleTimeString();
+  clock.textContent = time;
+  // time = "1:00:00 AM";
+  // watch for alarm
+  if (time === alarm) {
+    sound.play();
+    
+    // show snooze button
+    snooze.className = "";
+  }
+  setTimeout(displayTime, 1000);
+}
+
+displayTime();
+
+// add option values relative towards time
+function addMinSecVals(id) {
+  var select = id;
+  var min = 59;
+  
+  for (i = 0; i <= min; i++) {
+    // defined as new Option(text, value)
+    select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i < 10 ? "0" + i : i);
+  }
+}
+
+function addHours(id) {
+  var select = id;
+  var hour = 12;
+  
+  for (i = 1; i <= hour; i++) {
+    // defined as new Option(text, value)
+    select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i);
+  }
+}
+
+addMinSecVals(minutes);
+addMinSecVals(seconds);
+addHours(hours);
+
+// set and clear alarm
+startstop.onclick = function() {
+  // set the alarm
+  if (activeAlarm === false) {
+    hours.disabled = true;
+    minutes.disabled = true;
+    seconds.disabled = true;
+    ampm.disabled = true;
+    
+    alarm = hours.value + ":" + minutes.value + ":" + seconds.value + " " + ampm.value;
+    this.textContent = "Clear Alarm";
+    activeAlarm = true;
+  } else {
+    // clear the alarm
+    hours.disabled = false;
+    minutes.disabled = false;
+    seconds.disabled = false;
+    ampm.disabled = false;
+    
+    sound.pause();
+    alarm = "00:00:00 AM";
+    this.textContent = "Set Alarm";
+    
+    // hide snooze button
+    snooze.className = "hide";
+    activeAlarm = false;
+  }
+};
+
+// snooze for 5 minutes
+snooze.onclick = function() {
+  if (activeAlarm === true) {
+    // grab the current hour and minute
+    currentH = time.substr(0, time.length - 9);
+    currentM = time.substr(currentH.length + 1, time.length - 8);
+    
+    if (currentM >= "55") {
+      minutes.value = "00";
+      hours.value = parseInt(currentH) + 1;
+    } else {
+      if (parseInt(currentM) + 5 <= 9) {
+        minutes.value = "0" + parseInt(currentM + 5);
+      } else {
+        minutes.value = parseInt(currentM) + 5;
+      }
+    }
+    
+    // hide snooze button
+    snooze.className = "hide";
+    
+    // now reset alarm
+    startstop.click();
+    startstop.click();
+  } else {
+    return false;
+  }
+};
+</script>
+</html>
