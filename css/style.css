@@ -16,6 +16,10 @@ nav a{
     text-decoration: none;
     font-size: 20px;
 }
+.divider{
+    margin-top:20px;
+    border: 0.5px dashed rgb(250,250,250,0.5);
+}
 .alarm-clock{
 display: block;
 text-align: center;
@@ -23,11 +27,6 @@ text-align: center;
 .clock{
     color: #fff;
     font-size:50px;
-}
-.alarm-clock{
-    display: block;
-    margin: 100px;
-    margin-top: 100px;
 }
 .active{
     border-bottom: 1px dotted rgb(250,250,250,0.5);
@@ -53,8 +52,8 @@ border: 1px solid rgb(250,250,250,0.5);
 background-color: transparent;
 color: #fff;
 font-size: 20px;
-margin-left:50px;
 cursor: pointer;
+width: 150px;
 }
 .hide {
   display: none;
@@ -65,8 +64,8 @@ border: 1px solid rgb(250,250,250,0.5);
 background-color: transparent;
 color: #fff;
 font-size: 20px;
-margin-left:50px;
 cursor: pointer; 
+width: 150px;
 }
 table{
  margin-left: auto;
@@ -83,12 +82,13 @@ table{
 }
 button{
     background-color: transparent;
-    border:1px solid #fff;
+    border:1px solid rgb(250,250,250,0.5);
     padding:10px 20px;
     color: #fff;
     font-size: 18px;
     cursor: pointer;
     margin: 10px;
+    width: 150px;
 }
 .stopwatch{
     margin-left: auto;
@@ -102,8 +102,57 @@ button{
 }
 ul li{
     list-style: none;
-    margin:10px 0;
 }
 a{
     outline: none;
 }
+
+
+
+
+/*Media Quries*/
+
+@media only screen and (max-width: 600px) {
+    select {
+    background-color: transparent;
+    color: #fff;
+    font-size: 20px;
+    border-left: none;
+    border-right: none;
+    padding: 10px;
+    margin: 8px;
+}
+
+#snooze{
+    width: 100%;
+    margin:10px 0;
+}
+.setalarm{
+    width: 100%;
+    margin:10px 0;
+    }
+.active{
+    box-shadow: 1px 1px 1px 1px;
+    padding :10px;
+    border-radius:10px;
+    padding:10px 15px;
+    margin: 0;
+}
+button{
+    width: 40%;
+    margin: 10px 10;
+}
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {...}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}

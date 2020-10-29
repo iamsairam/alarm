@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>Alarm</title>
+  <meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <nav>
@@ -10,6 +12,10 @@
 	<a href="#stopwatch" class="" id="stopwatch">Stopwatch</a>
 	<a href="#timereminder" class="" id="timereminder">Timer</a>
 </nav>
+
+<div class="divison">
+  <hr class="divider">
+</div>
 
   <div class="alarm-clock" id="alarmmaincontainer">
   <div class="alarm-container">
@@ -257,7 +263,7 @@ startstop.onclick = function() {
   	localStorage.setItem("alarmtime", alarm);
   	// Retrieve
   	//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-	alarmsettime.textContent="Alarm set for "+localStorage.getItem("alarmtime");
+	alarmsettime.textContent="New Alarm set for "+localStorage.getItem("alarmtime");
 	}
 	else {
   	document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
@@ -280,7 +286,7 @@ startstop.onclick = function() {
     activeAlarm = false;
   }
 };
-alarmsettime.textContent="Alarm set for "+localStorage.getItem("alarmtime");
+alarmsettime.textContent="Last Alarm set for "+localStorage.getItem("alarmtime");
 
 // snooze for 5 minutes
 snooze.onclick = function() {
