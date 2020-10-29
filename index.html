@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<!--responsive view port-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alarm</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<section>
-	<div class="menu">
-	<ul class="sidebar">
-	<li id="alarmid" class="alarmcls"><img  src="icons/clock.svg" class="alarmicon">Alarm</li>
-	<li id="swid" class="swcls"><img src="icons/stopwatch.svg" class="stopwatchicon">Stopwatch</li>
-	<li id="timerid" class="timercls"><img src="icons/hourglass.svg" class="timericon">Timer</li>
-	</ul>
-</div>
-</section>
+<nav>
+	<a href="#alarm" class="active" id="alarmtimer">Alarm Timer</a>
+	<a href="#stopwatch" class="" id="stopwatch">Stopwatch</a>
+	<a href="#timereminder" class="" id="timereminder">Timer</a>
+</nav>
 
-<main>
-	
-<div class="alarm-section" id="alarm-section" >
-	<div class="alarmheader">
-		<p class="addalarm"><span class="addalarmtxt" id="addalarm">ADD A NEW ALARM</span></p>
-	</div>
-
-	<img src="icons/clock.svg" class="alambg">
-	<h1 class="noalarms">No Alarms</h1>
-</div>
-
-<div class="setalarm-section" id="setalarm-section" style="display: none;">
-
-<div class="table">
-  <div class="cell">
-
+  <div class="alarm-clock" id="alarmmaincontainer">
+  <div class="alarm-container">
+  	<h2 class="clock">Alarm Clock</h2>
     <h1 id="clock" class="clock"></h1>
     
     <select id="hours"></select>
@@ -46,108 +27,78 @@
     
     <p>
       <button id="snooze" class="hide">Snooze</button>
-      <button id="startstop">Set Alarm</button>
+      <button id="startstop" class="setalarm">Set Alarm</button>
     </p>
-
+    <table>
+    	<tr>
+    		<td id="alarmsettime" class="alarmsettime"></td>
+    	</tr>
+    </table>
   </div>
   </div>
-<!-- 	<div class="setalarmform">
-		<form>
-			<span class="cross" id="crossbtn">X</span>
-			<div class="" style="padding-top: 20px;">
-			<label for="name" class="name" id="name">Name : </label>
-			<input type="text" name="nameval" class="nameval" id="nameval">
-			</div>
-			<div style="margin-top: 20px;">
-			<label for="date" class="date" id="date">Date : </label>
-			<button class="week" id="sun">S</button>
-			<button class="week" id="mon">M</button>
-			<button class="week" id="tue">T</button>
-			<button class="week" id="wed">W</button>
-			<button class="week" id="thu">T</button>
-			<button class="week" id="fri">F</button>
-			<button class="week" id="sat">S</button>
-			</div>
 
-			<div class="hrs_min_table">
-			<table class="timeset">
-				<tr>
-					<td>hours</td>
-					<td>&nbsp;</td>
-					<td>minutes</td>
-				</tr>
-				<tr>
-					<td><img src="icons/up-arrow.svg" width="15px"></td>
-					<td>&nbsp;</td>
-					<td><img src="icons/up-arrow.svg" width="15px"></td>
-				</tr>
-				<tr>
-					<td>00</td>
-					<td>:</td>
-					<td>00</td>
-				</tr>
-				<tr>
-				<td><img src="icons/down-arrow.svg" width="15px"></td>
-					<td>&nbsp;</td>
-					<td><img src="icons/down-arrow.svg" width="15px"></td>
-				</tr>
-			</table>	
-			</div>
-			
-			<div style="padding-top: 20px;">
-			<label class="sound" id="sound">Sound</label>
-
-			<button class="tones" id="tone1">1</button>
-			<button class="tones" id="tone2">2</button>
-			<button class="tones" id="tone3">3</button>
-			<button class="tones" id="tone4">4</button>
-			<button class="tones" id="tone5">5</button>
-			<button class="snooz" id="snooz">Set snooz</button>
-			</div>
-
-			<div>
-				<button class="save" id="save">save changes</button>
-			</div>
-		</form>
-	</div> -->
 </div>
 
-<div class="stopwatch-section" id="stopwatch-section" style="display: none;">
-	<div class="stopwatch-container">
-		<div class="swatchtime">00:00:00</div>
-		<div><button onclick="starttime()" class="swbtn">start</button></div>
-		<div><button onclick="stoptime()" class="swbtn">stop</button><br><button onclick="laptime()" class="swbtn">lap</button></div>
-		<div><!-- <button onclick="resumetime()">resume</button> --><button onclick="resettime()" class="swbtn">reset</button></div>
+  <div class="stopwatch" id="stopwatchmaincontainer">
+  	<div>
+  		<h1>Stopwatch</h1>
+  	<div class="stopwatch-section" id="stopwatch-section">
+		<div class="stopwatch-container">
+		<h1 class="swatchtime">00:00:00</h1>
+		<button onclick="starttime()" onclick="starttime()">start</button>
+		<button onclick="pausetime()" onclick="pausetime()">pausetime</button>
+		<button onclick="stoptime()" onclick="stoptime()">stoptime</button>
+		<button onclick="restarttime()">restarttime</button>
+		<button onclick="laptime()">laptime</button> 
+		<button onclick="resetlaptime()">resetlaptime</button>
+		</div>
 	</div>
 
 	<ul class="laps">
 	</ul>
 
 </div>
+  	</div>
+  	
 
-</main>
+  <div class="timereminderblock" id="timereminderhmaincontainer">
+  	<div>
+  		<h1>Time Reminder ...</h1>
+  	</div>
 
 </body>
 <script type="text/javascript">
+alarmtimer.onclick = function() {
+this.classList.add("active");
+stopwatch.classList.remove("active");
+timereminder.classList.remove("active");
+alarmmaincontainer.style.display="block";
+stopwatchmaincontainer.style.display="none";
+timereminderhmaincontainer.style.display="none";
+}
 
-document.getElementById("addalarm").addEventListener("click", function() {
-document.getElementById("alarm-section").style.display="none";
-document.getElementById("setalarm-section").style.display="block";
-});	
+stopwatch.onclick = function() {
+this.classList.add("active");
+alarmtimer.classList.remove("active");
+timereminder.classList.remove("active");
+alarmmaincontainer.style.display="none";
+stopwatchmaincontainer.style.display="block";
+timereminderhmaincontainer.style.display="none";
 
-document.getElementById("crossbtn").addEventListener("click", function() {
-document.getElementById("alarm-section").style.display="block";
-document.getElementById("setalarm-section").style.display="none";
-});	
+}
 
-document.getElementById("swid").addEventListener("click", function() {
-document.getElementById("alarm-section").style.display="none";
-document.getElementById("setalarm-section").style.display="none";
-document.getElementById("stopwatch-section").style.display="block";
-document.getElementById("swid").style.cssText=" background-color:#308a7c;opacity:0.8;border-left:5px solid yellowgreen;";
+timereminder.onclick = function() {
+this.classList.add("active");
+alarmtimer.classList.remove("active");
+stopwatch.classList.remove("active");
+alarmmaincontainer.style.display="none";
+stopwatchmaincontainer.style.display="none";
+timereminderhmaincontainer.style.display="block";
+}
 
-});	
 
+</script>
+<script type="text/javascript">
 
 // stopwatch code here
 
@@ -177,11 +128,12 @@ function runtime(){
 	}
 }
 
-function stoptime(){
+
+function pausetime(){
 sTimer();
 }
 
-function resettime(){
+function stoptime(){
 sTimer();
 mil=0;
 sec=0;
@@ -190,7 +142,7 @@ getTimer();
 }
 
 function getTimer(){
-watchtime.textContent=(min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec)+":"+(mil<10?"0"+mil:mil);		
+return(watchtime.textContent=(min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec)+":"+(mil<10?"0"+mil:mil));
 }
 
 function sTimer(){
@@ -198,23 +150,45 @@ clearInterval(timer);
 timer=false;
 }
 
-
-// function restarttime(){
-// 	stoptime();
-// 	starttime();
-// }
-
+function restarttime(){
+	stoptime();
+	starttime();
+}
 
 function laptime(){
 	if (timer) {
 		var l= document.createElement("li");
 		l.innerText = getTimer();
 		lapvalues.appendChild(l); 
+		if (typeof(Storage) !== "undefined") {
+  	// Store
+  	localStorage.setItem("slaptimep", getTimer());
+  	// Retrieve
+  	//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+  	l.textContent=localStorage.getItem("slaptimep");
 	}
+	else {
+  	document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+	}
+	}
+
+}
+var l= document.createElement("li");
+l.innerText = getTimer();
+lapvalues.appendChild(l); 
+l.textContent=localStorage.getItem("slaptimep");
+
+alarmsettime.textContent=localStorage.getItem("");
+
+
+function resetlaptime(){
+	lapvalues.innerHTML=" ";
 }
 </script>
+
 <script type="text/javascript">
-	    var time, alarm, currentH, currentM,
+	// alarm code
+	var time, alarm, currentH, currentM,
     activeAlarm = false,
     sound = new Audio("multimedia/ring1.mp3");
 
@@ -276,7 +250,21 @@ startstop.onclick = function() {
     alarm = hours.value + ":" + minutes.value + ":" + seconds.value + " " + ampm.value;
     this.textContent = "Clear Alarm";
     activeAlarm = true;
-  } else {
+
+    // Check browser support
+	if (typeof(Storage) !== "undefined") {
+  	// Store
+  	localStorage.setItem("alarmtime", alarm);
+  	// Retrieve
+  	//document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+	alarmsettime.textContent="Alarm set for "+localStorage.getItem("alarmtime");
+	}
+	else {
+  	document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+	}
+    
+  } 
+  else {
     // clear the alarm
     hours.disabled = false;
     minutes.disabled = false;
@@ -292,6 +280,7 @@ startstop.onclick = function() {
     activeAlarm = false;
   }
 };
+alarmsettime.textContent="Alarm set for "+localStorage.getItem("alarmtime");
 
 // snooze for 5 minutes
 snooze.onclick = function() {
