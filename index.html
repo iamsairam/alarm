@@ -69,7 +69,32 @@
 
   <div class="timereminderblock" id="timereminderhmaincontainer">
   	<div>
-  		<h1>Time Reminder ...</h1>
+<h1 class="time-rem-ttl">
+  Time Reminder
+</h1>
+  		  <div>
+<form>
+  <div>
+  <label>Minutes: </label>
+<input type="text" id="mns" name="mns" placeholder="Enter Minutes To Remind you" maxlength="3"  onkeypress="return isNumber(event)"/> <br />
+</div>
+<br>
+<div>
+<label> Seconds:</label> <input type="text" id="scs" name="scs" placeholder="Enter Seconds To Remind you" maxlength="2" onkeypress="return isNumber(event)"/><br/>
+</div>
+<button type="button" id="btnct" value="START" onclick="countdownTimer()"/>Submit</button>
+<br />
+Countdown Time: &nbsp; <span id="showmns">00</span>:<span id="showscs">00</span>
+<br>
+<div style="display: none;">
+<audio controls id="myAudio" >
+  <source src="multimedia/ring1.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+</div>
+</form>
+</div>  
+
   	</div>
 
 </body>
@@ -316,5 +341,87 @@ snooze.onclick = function() {
     return false;
   }
 };
+</script>
+
+<script type="text/javascript">
+/* Function to display a Countdown timer with starting time from a form */
+// sets variables for minutes and seconds
+var ctmnts = 0;
+var ctsecs = 0;
+var startchr = 0;       // used to control when to read data from form
+
+var audio = document.getElementById("myAudio"); 
+
+function playAud() { 
+  audio.play(); 
+} 
+
+function pauseAud() { 
+  audio.pause(); 
+}
+
+function countdownTimer() {
+  // https://coursesweb.net/javascript/
+  // if $startchr is 0, and form fields exists, gets data for minutes and seconds, and sets $startchr to 1
+  if(startchr == 0 && document.getElementById('mns') && document.getElementById('scs')) {
+    // makes sure the script uses integer numbers
+    ctmnts = parseInt(document.getElementById('mns').value) + 0;
+    ctsecs = parseInt(document.getElementById('scs').value) * 1;
+
+    // if data not a number, sets the value to 0
+    if(isNaN(ctmnts)) ctmnts = 0;
+    if(isNaN(ctsecs)) ctsecs = 0;
+
+    // rewrite data in form fields to be sure that the fields for minutes and seconds contain integer number
+    document.getElementById('mns').value = ctmnts;
+    document.getElementById('scs').value = ctsecs;
+    startchr = 1;
+    document.getElementById('btnct').setAttribute('disabled', 'disabled');  
+    pauseAud();
+       // disable the button
+  }
+  // if minutes and seconds are 0, sets $startchr to 0, and return false
+  if(ctmnts==0 && ctsecs==0) {
+    startchr = 0;
+    document.getElementById('btnct').removeAttribute('disabled');
+        // remove "disabled" to enable the button
+     playAud();
+    /* HERE YOU CAN ADD TO EXECUTE A JavaScript FUNCTION WHEN COUNTDOWN TIMER REACH TO 0 */
+
+    return false;
+  }
+  else {
+    // decrease seconds, and decrease minutes if seconds reach to 0
+    ctsecs--;
+    if(ctsecs < 0) {
+      if(ctmnts > 0) {
+        ctsecs = 59;
+        ctmnts--;
+      }
+      else {
+        ctsecs = 0;
+        ctmnts = 0;
+      }
+    }
+  }
+
+  // display the time in page, and auto-calls this function after 1 seccond
+  document.getElementById('showmns').innerHTML = ctmnts;
+  document.getElementById('showscs').innerHTML = ctsecs;
+  setTimeout('countdownTimer()', 1000);
+}
+//-->
+
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+
+    }
+    return true;
+}
+
 </script>
 </html>
