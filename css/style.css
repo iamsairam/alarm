@@ -90,6 +90,22 @@ button{
     margin: 10px;
     width: 150px;
 }
+button:disabled,
+button[disabled]{
+  border: 1px solid rgb(250,250,250,0.5);
+  background-color: rgb(250,250,250,0.5);
+  color: #fff;
+  cursor: not-allowed;
+}
+#mns,#scs{
+    border: 1px solid rgb(250,250,250,0.5);
+    background-color: transparent;
+    color: rgb(250,250,250);
+    height: 30px;
+    width: 300px;
+}
+
+
 .stopwatch{
     margin-left: auto;
   margin-right: auto;
@@ -106,8 +122,6 @@ ul li{
 a{
     outline: none;
 }
-
-
 
 
 /*Media Quries*/
